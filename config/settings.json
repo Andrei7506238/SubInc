@@ -1,0 +1,5 @@
+{
+  	"mkvmerge-path" : "mkvtoolnik\\mkvmerge.exe",
+	"languages" : "ro",
+	"delete-original-file-after-task-done" : false
+}
