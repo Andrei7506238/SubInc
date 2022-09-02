@@ -11,6 +11,9 @@ tvs
 ###SERIAL_CATS###
 serial
 serials
+###EPISODE_CATS###
+episode
+episodes
 ###DOCUMENTARY_CATS###
 documentary
 documentaries

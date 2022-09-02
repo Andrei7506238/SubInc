@@ -47,9 +47,9 @@ def getDownloadLink(api_key: str, subtitle_id: int):
     return dwn_response.json()["link"]
 
 
-def getDownloadLinkAuthUser(token: str, subtitle_id: int):
+def getDownloadLinkAuthUser(api_key: str, subtitle_id: int, token: str):
     dwn_url = "https://api.opensubtitles.com/api/v1/download"
-    dwn_headers = {"Authorization": "Bearer ", "Content-Type": "application/json"}
+    dwn_headers = {"Api-Key": api_key, "Authorization": "Bearer " + token, "Content-Type": "application/json"}
     dwn_payload = {"file_id": subtitle_id}
 
     dwn_response = requests.post(dwn_url, headers=dwn_headers, data=json.dumps(dwn_payload))
@@ -93,9 +93,9 @@ def getSubtitleReady(dir_path: str, file_name: str, full_file_path: str, languag
         # Login to OpenSubtitles
         try:
             token = loginToOpenSubtitles(api_key, uname, upass)
-            dwn_link = getDownloadLinkAuthUser(token, subtitle_id)
-        except:
-            print("Auth not working - using simple app API-KEY")
+            dwn_link = getDownloadLinkAuthUser(token, subtitle_id, token)
+        except Exception as e:
+            print("Auth not working - using simple app API-KEY - " + str(e))
             dwn_link = getDownloadLink(api_key, subtitle_id)
     else:
         dwn_link = getDownloadLink(api_key, subtitle_id)
