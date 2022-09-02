@@ -70,15 +70,20 @@ void setWorkingPath(const std::string& program_path) {
 }
 
 int main(int argc, char* argv[]) {
+	//Get main working directory
+	std::string mainDirectory;
+	if (argc < 2) {
+		mainDirectory = std::filesystem::current_path().string();
+	}
+	else {
+		mainDirectory = argv[1];
+	}
+
+	std::cout << "Working Directory : " << mainDirectory << std::endl;
+
 	//Get path of the directory in which this .exe file is located, set working path to that
 	std::string program_path = std::filesystem::weakly_canonical(std::filesystem::path(argv[0])).parent_path().string();
 	setWorkingPath(program_path);
-
-	//Check if first argument is directory name
-	if (argc < 2) {
-		std::cerr << "No directory has been passed as command line argument. Check github repo for instructions";
-		exit(1);
-	}
 	
 	//Check if a qBittorent category has been passed and if it is a movie one
 	if (argc == 3) {
@@ -90,9 +95,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	//Get list of video files in given directory
-	std::string mainDirectory(argv[1]);
 	std::list<std::string> moviesPaths;
-
 	for (const auto& file : std::filesystem::recursive_directory_iterator(mainDirectory)) {
 		std::string filePath = file.path().string();
 		if (isMovie(getFileExtension(filePath)))
