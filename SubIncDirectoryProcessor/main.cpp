@@ -36,7 +36,7 @@ bool isMovie(std::string extension) {
 
 void addSubtitlesToAllMovies(const std::list<std::string>& moviesPaths) {
 	for (auto& moviePath : moviesPaths) {
-		std::string SubIncMainPyFileCommandRun = "py main.py " + moviePath;
+		std::string SubIncMainPyFileCommandRun = "py main.py \"" + moviePath + "\"";
 		std::system(SubIncMainPyFileCommandRun.c_str());
 	}
 }

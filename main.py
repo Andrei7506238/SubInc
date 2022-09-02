@@ -25,10 +25,7 @@ def searchForSubtitles(api_key: str, file_name: str, movie_hash: str, language: 
 
     search_response = requests.get(search_url, headers=search_headers, params=search_query)
 
-    if search_response.status_code != 200:
-        raise Exception("Search error :" + str(search_response.status_code))
-
-    if search_response.json()["total_count"] == 0:
+    if search_response.status_code != 200 or search_response.json()["total_count"] == 0 :
         return False, 0
 
     return True, int(search_response.json()["data"][0]["attributes"]["files"][0]["file_id"])
@@ -118,7 +115,6 @@ def deleteOriginal(original_filePath, new_filePath):
     os.remove(original_filePath)
     os.renames(new_filePath, original_filePath)
 
-
 def main():
     # Import settings
     try:
@@ -136,9 +132,13 @@ def main():
     use_bearer_auth = user_settings["use-bearer-auth"]
 
     # Get filename, path, extension
-    if len(sys.argv) != 2:
+    if len(sys.argv) < 2:
         print("You have to specify the filename as command line argument. Check Github repo for instructions")
         exit(1)
+    if len(sys.argv)>2:
+        print("Put path with spaces between double quotes")
+        exit(1)
+
     full_path_movie = sys.argv[1]
     parts = os.path.split(full_path_movie)
     dir_path = parts[0] + "\\"
