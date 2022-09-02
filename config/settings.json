@@ -1,5 +1,8 @@
 {
   	"mkvmerge-path" : "mkvtoolnik\\mkvmerge.exe",
+	"use-bearer-auth" : true,
 	"languages" : "ro",
-	"delete-original-file-after-task-done" : false
+	"subtitled_movie_prefix" : "SUB_",
+	"delete-subtitle-file-after-task-done" : true,
+	"replace-original-file-after-task-done" : false
 }
