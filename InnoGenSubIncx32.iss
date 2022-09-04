@@ -41,7 +41,8 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Files]
 Source: "{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "config\*"; DestDir:"{app}"
+Source: "config\settings.json"; DestDir:"{app}\config"
+Source: "config\validCategories.txt"; DestDir:"{app}\config"
 Source: "mkvtoolnik\*"; DestDir:"{app}"
 Source: "main.py"; DestDir:"{app}"
 Source: "movieHashCalculator.py"; DestDir:"{app}"
