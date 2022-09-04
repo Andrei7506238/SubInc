@@ -185,5 +185,5 @@ fabric.properties
 # .idea
 
 auth.json
-SubIncDirectoryProcessor.exe
 files_error_log
+OUT/
