@@ -6,21 +6,17 @@ Supports processing at the directory level and provides an easy qBittorent integ
 
 
 ## Features:
-- Modifiable cross-platform python script with many easy customizable options (built mainly for Windows) 
+- Modifiable Windows python script with many easy customizable options (can be made to work on other operationg systemn 
 - Download subtitles using the [Opensubtitles API](https://opensubtitles.stoplight.io/docs/opensubtitles-api).
 - Automatically merge the video and the subtitle using [MKVToolNix - mkvmerge](https://mkvtoolnix.download/)
 - Batch processing at the level of directory, easy interface with Windows OS, batch processing at the directory level and qBittorent integration
-
-## Requirements (Windows):
-- OpenSubtitles.com account
-- Python (3.10.6 works for sure)
-- MKVToolNix (v70.0.0 works for sure -already included in the release)
-- Visual Studio Redistributable (v17 works for sure)
-- The "requests" python module
-For more info check the [How to install SubInc - Windows]() wiki page
 
 ## Warning:
 The project is still work in progress.  
 Some things might not work right now.  
 Many features under development  
 Many things will change
+
+## Download
+Download from here: https://github.com/Andrei7506238/SubInc/releases
+Follow install steps : https://github.com/Andrei7506238/SubInc/wiki/Install-Guide---Windows
