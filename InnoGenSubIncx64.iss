@@ -33,8 +33,6 @@ WizardStyle=modern
 
 [Tasks]
 Name: InstallVCRedis; Description: "Install VC_redist.x64"
-Name: InstallPython; Description: "Install python-3.9.10-amd64.exe"
-Name: InstallRequest; Description: "Installs a python module required for the software to work"
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -42,15 +40,14 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 [Files]
 Source: "{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "config\settings.json"; DestDir:"{app}\config"
+Source: "config\placeholder\auth.json"; DestDir:"{app}\config"
 Source: "config\validCategories.txt"; DestDir:"{app}\config"
 Source: "mkvtoolnik\*"; DestDir:"{app}"
-Source: "main.py"; DestDir:"{app}"
+Source: "main.exe"; DestDir:"{app}"
 Source: "movieHashCalculator.py"; DestDir:"{app}"
 Source: "LICENSE.txt"; DestDir:"{app}"
 
 Source: "0PREREQ\VC_redist.x64.exe"; DestDir:"{tmp}"
-Source: "0PREREQ\python-3.9.10-amd64.exe"; DestDir:"{tmp}"
-Source: "0PREREQ\install_requests.bat"; DestDir:"{tmp}"
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
@@ -61,5 +58,3 @@ Root: HKCR; Subkey: "Directory\Background\shell\SubInc\command"; ValueType: stri
 
 [Run]
 Filename: "{tmp}\VC_redist.x64.exe";    Tasks: InstallVCRedis
-Filename: "{tmp}\python-3.9.10-amd64.exe";    Tasks: InstallPython
-Filename: "{tmp}\install_requests.bat"; Tasks: InstallRequest

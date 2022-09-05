@@ -187,3 +187,6 @@ fabric.properties
 auth.json
 files_error_log
 OUT/
+
+build/
+dist/
