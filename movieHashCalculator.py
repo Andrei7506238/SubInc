@@ -32,5 +32,5 @@ def hashFile(name):
         returnedhash = "%016x" % hash
         return returnedhash
 
-    except(IOError):
-        return "IOError"
+    except IOError as e:
+        raise e
