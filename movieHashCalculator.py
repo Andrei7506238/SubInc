@@ -13,7 +13,7 @@ def hashFile(name):
         hash = filesize
 
         if filesize < 65536 * 2:
-            return "SizeError"
+            raise IOError("SizeError : " + name)
 
         for x in range(65536 // bytesize):
             buffer = f.read(bytesize)

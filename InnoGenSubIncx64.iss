@@ -2,10 +2,10 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Subtitles Incorporated"
-#define MyAppVersion "1.0.0"
-#define MyAppPublisher "Andrei7506238"
+#define MyAppVersion "1.1.0"
+#define MyAppPublisher ""
 #define MyAppURL "https://github.com/Andrei7506238/SubInc"
-#define MyAppExeName "subinc.exe"
+#define MyAppExeName "SubInc.exe"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -38,14 +38,15 @@ Name: InstallVCRedis; Description: "Install VC_redist.x64"
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Files]
-Source: "{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "dist\SubInc.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "dist\SubIncCore.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "config\settings.json"; DestDir:"{app}\config"
 Source: "config\placeholder\auth.json"; DestDir:"{app}\config"
-Source: "config\validCategories.txt"; DestDir:"{app}\config"
-Source: "mkvtoolnik\*"; DestDir:"{app}"
-Source: "main.exe"; DestDir:"{app}"
-Source: "movieHashCalculator.py"; DestDir:"{app}"
+Source: "config\dirProcessorSettings.json"; DestDir:"{app}\config"
+Source: "mkvtoolnik\*"; DestDir:"{app}\mkvtoolnik"
 Source: "LICENSE.txt"; DestDir:"{app}"
+Source: "HELP.url"; DestDir:"{app}"
+Source: "editsettingshelper.bat"; DestDir:"{app}"
 
 Source: "0PREREQ\VC_redist.x64.exe"; DestDir:"{tmp}"
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
@@ -58,3 +59,4 @@ Root: HKCR; Subkey: "Directory\Background\shell\SubInc\command"; ValueType: stri
 
 [Run]
 Filename: "{tmp}\VC_redist.x64.exe";    Tasks: InstallVCRedis
+Filename: "{app}\editsettingshelper.bat"; Description: "IMPORTANT: Open the settings file for editing"; Flags: postinstall
