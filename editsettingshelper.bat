@@ -1,4 +1,3 @@
-start HELP.url
-start notepad config/auth.json
-start notepad config/settings.json
+start notepad config/auth.yaml
+start notepad config/settings.yaml
 exit

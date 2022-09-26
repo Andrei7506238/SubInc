@@ -184,9 +184,6 @@ fabric.properties
 # idea folder, uncomment if you don't need it
 # .idea
 
-auth.json
-files_error_log
+# UserDefined
+config/auth.yaml
 OUT/
-
-build/
-dist/

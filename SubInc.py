@@ -1,12 +1,12 @@
 import os
 import sys
 import glob
-import json
+import yaml
 import pathlib
 import SubIncCore
 
 
-def checkValidQTBCat(given_category: str, known_movie_cats: list, proc_if_none: bool)->bool:
+def checkValidQTBCat(given_category: str, known_movie_cats: list, proc_if_none: bool) -> bool:
     if given_category == "":
         if proc_if_none:
             return True
@@ -29,35 +29,35 @@ def getMovieList(file_list: list) -> list:
 
 def loadDirProcSettings() -> dict:
     try:
-        with open('config\\dirProcessorSettings.json') as dp_settings_file:
-            dp_settings_dict = json.load(dp_settings_file)
+        with open('config/dirProcessorSettings.yaml') as dp_settings_file:
+            dp_settings_dict = yaml.load(dp_settings_file, Loader=yaml.Loader)
             return dp_settings_dict
     except Exception as e:
-        print("[-] Could not load dirProcessorSettings.json : " + str(e))
-        exit()
+        print("[-] Could not load dirProcessorSettings.yaml : " + str(e))
+        raise Exception("[-] Could not load dirProcessorSettings.yaml : " + str(e))
 
 
 def main():
     # Get current working dir and app dir
     working_dir: str = os.getcwd()
-    app_dir: str = os.path.realpath(os.path.dirname(__file__))
+    app_dir: str = os.path.dirname(os.path.realpath(sys.argv[0]))
 
     # Check for arguments
     if len(sys.argv) > 1:
         working_dir = sys.argv[1]
 
+    working_dir = os.path.abspath(working_dir)
     print("[+] Working directory : " + working_dir)
-    print("[+] App directory : " + working_dir)
+    print("[+] App directory : " + app_dir)
 
-    # Load settings
+    # Load settings after changing cwd
     os.chdir(app_dir)
     dp_pref_dict = loadDirProcSettings()
-    os.chdir(working_dir)
 
     # Check if qBittorent Category has been passed and check if it is a movie one
     if len(sys.argv) == 4 and sys.argv[2] == "-qBC":
         given_category = sys.argv[3]
-        if not checkValidQTBCat(given_category, dp_pref_dict["accepted_movie_extensions"], dp_pref_dict["process_folder_if_category_empty"]) :
+        if not checkValidQTBCat(given_category, dp_pref_dict["accepted_movie_categories"], dp_pref_dict["process_folder_if_category_empty"]) :
             return
 
     # Get list of video files in working dir

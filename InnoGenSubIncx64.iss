@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Subtitles Incorporated"
-#define MyAppVersion "1.1.0"
+#define MyAppVersion "1.1.1"
 #define MyAppPublisher ""
 #define MyAppURL "https://github.com/Andrei7506238/SubInc"
 #define MyAppExeName "SubInc.exe"
@@ -18,7 +18,7 @@ AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
-DefaultDirName={autopf}\SubtitlesIncorporated
+DefaultDirName={autopf64}\SubInc
 DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=yes
 LicenseFile=LICENSE.txt
@@ -32,7 +32,7 @@ SolidCompression=yes
 WizardStyle=modern
 
 [Tasks]
-Name: InstallVCRedis; Description: "Install VC_redist.x64"
+Name: InstallVCRedis; Description: "Install Microsoft Visual C++ Redistributable"
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -40,9 +40,9 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 [Files]
 Source: "dist\SubInc.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "dist\SubIncCore.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "config\settings.json"; DestDir:"{app}\config"
-Source: "config\placeholder\auth.json"; DestDir:"{app}\config"
-Source: "config\dirProcessorSettings.json"; DestDir:"{app}\config"
+Source: "config\settings.yaml"; DestDir:"{app}\config"
+Source: "config\placeholder\auth.yaml"; DestDir:"{app}\config"
+Source: "config\dirProcessorSettings.yaml"; DestDir:"{app}\config"
 Source: "mkvtoolnik\*"; DestDir:"{app}\mkvtoolnik"
 Source: "LICENSE.txt"; DestDir:"{app}"
 Source: "HELP.url"; DestDir:"{app}"
@@ -50,9 +50,6 @@ Source: "editsettingshelper.bat"; DestDir:"{app}"
 
 Source: "0PREREQ\VC_redist.x64.exe"; DestDir:"{tmp}"
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
-
-[Icons]
-Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 
 [Registry]
 Root: HKCR; Subkey: "Directory\Background\shell\SubInc\command"; ValueType: string; ValueData: "{app}\{#MyAppExeName}"; Flags: uninsdeletekey

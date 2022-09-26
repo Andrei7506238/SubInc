@@ -1,0 +1,54 @@
+# Please check the config file editing guide (https://github.com/Andrei7506238/SubInc/wiki/Edit- config- files)
+# In this file you can change the behaviour of the program when it's processing the files from a folder
+
+# ===== WARNING =====
+# The program will crash if this file isn't completed properly.
+# Please do not change the structure nor the format of this file.
+# ===================
+
+# What file wxtensions should the program process?
+accepted_movie_extensions:
+  - .mp4
+  - .m4v
+  - .mpg
+  - .mov
+  - .wmv
+  - .avi
+  - .flw
+  - .f4v
+  - .webm
+  - .mkv
+
+# qBittorent integration: Should the torrents with no category set be processed by this program?
+process_folder_if_category_empty : false
+
+# qBitorent integration: What torrent categories should be processed by this program?
+accepted_movie_categories:
+  - movie
+  - movies
+  - anime
+  - animes
+  - tv
+  - television
+  - series
+  - season
+  - seasons
+  - episode
+  - episodes
+  - documentary
+  - documentaries
+  - desene
+  - filme
+  - filme 3d
+  - filme 4k
+  - filme 4k blu- ray
+  - filme blu- ray
+  - filme dvd
+  - filme dvd- ro
+  - filme hd
+  - filme hd- ro
+  - filme sd
+  - seriale
+  - seriale 4k
+  - seriale hd
+  - seriale sd

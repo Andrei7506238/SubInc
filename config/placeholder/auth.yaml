@@ -1,0 +1,17 @@
+# Please check the install guide (https://github.com/Andrei7506238/SubInc/wiki/Install-Guide---Windows)
+# In this file you need to enter your OpenSubtitles.com credentials and you API KEY.
+
+# ===== WARNING =====
+# Completing this step is crucial for the program to work.
+# The program will crash if this file isn't completed properly.
+# Please do not change the structure nor the format of this file.
+# ===================
+
+# REPLACE paste_your_username_here with your opensubtitles.com username
+username: paste_your_username_here
+
+# REPLACE paste_your_password_here with your opensubtitles.com password
+password: paste_your_password_here
+
+# REPLACE paste_your_api_key_here with your opensubtitles.com API key
+api-key: paste_your_api_key_here

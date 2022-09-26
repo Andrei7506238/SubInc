@@ -1,0 +1,34 @@
+# Please check the config file editing guide (https://github.com/Andrei7506238/SubInc/wiki/Edit-config-files)
+# In this file you can change the behaviour of the program.
+
+# ===== WARNING =====
+# The program will crash if this file isn't completed properly.
+# Please do not change the structure nor the format of this file.
+# ===================
+
+# The language/languages code of the subtitle you want to download.
+languages : en
+
+# The path where mkvmerge.exe is on your computer. Leave as it is now (mkvtoolnik\\mkvmerge.exe).
+mkvmerge-path : mkvtoolnik\\mkvmerge.exe
+
+# The path of the file you want to save the logs for failed subtitle download. Useful for debugging.
+# Leave it as it is. If you don't want the program to save logs leave the field below empty
+error-file_path: files_errors.log
+
+# Should the program try to authenticate with username and password for downloading files before trying
+# just with the API KEY?
+# Leave it set to true unless the authentification fails or takes too long. In that case set it to false
+use-bearer-auth : true
+
+# The prefix of the subtitled movie and of the subtitle file downloaded.
+subtitled_movie_prefix : SUB_
+
+# Should the program also integrate the subtitle directly into the movie?
+softcode_subtitle : true
+
+# Should the program delete the subtitle after it's done?
+delete-subtitle-file-after-task-done : true
+
+# Should the program delete the old movie and replace it with the file containing both the movie and the subtitle?
+replace-original-file-after-task-done : false

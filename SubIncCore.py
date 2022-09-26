@@ -3,7 +3,9 @@ import datetime
 import os
 import sys
 import json
+import yaml
 import movieHashCalculator
+
 
 
 class SubDownInc:
@@ -27,6 +29,7 @@ class SubDownInc:
     upass = ""
     user_token = ""
 
+    # DO NOT USE OUTSIDE INIT
     def loadSettings(self):
         self.mkvmerge_file_path = self.settings_dict["mkvmerge-path"]
         self.language = self.settings_dict["languages"]
@@ -37,27 +40,31 @@ class SubDownInc:
         self.log_file_path = self.settings_dict["error-file_path"]
         self.bool_softcode_subtitle = self.settings_dict["softcode_subtitle"]
 
+    # DO NOT USE OUTSIDE INIT
     def loadAuth(self):
         self.api_key = self.auth_dict["api-key"]
         self.uname = self.auth_dict["username"]
         self.upass = self.auth_dict["password"]
 
     def __init__(self, arg_settings: dict = None, arg_auth: dict = None):
+        # Set the current working path to the install folder
+        os.chdir(os.path.dirname(os.path.realpath(sys.argv[0])))
+
         self.settings_dict = arg_settings
         self.auth_dict = arg_auth
 
         #Read settings from file if they weren't provided
         if arg_settings is None:
             try:
-                with open('config\\settings.json') as settings_file:
-                    self.settings_dict = json.load(settings_file)
+                with open('config/settings.yaml') as settings_file:
+                    self.settings_dict = yaml.load(settings_file, Loader=yaml.Loader)
             except Exception as e:
                 self.saveErrorsToLog(e, " INIT ERROR")
 
         if arg_auth is None:
             try:
-                with open('config\\auth.json') as auth_file:
-                    self.auth_dict = json.load(auth_file)
+                with open('config/auth.yaml') as auth_file:
+                    self.auth_dict = yaml.load(auth_file, Loader=yaml.Loader)
             except Exception as e:
                 self.saveErrorsToLog(e, " INIT ERROR")
 
@@ -136,9 +143,12 @@ class SubDownInc:
         os.remove(original_filePath)
         os.renames(new_filePath, original_filePath)
 
-    def processMovie(self, full_path_movie: str):
+    def processMovie(self, absolute_full_path_movie: str):
+        # Set the current working path to the install folder
+        os.chdir(os.path.dirname(os.path.realpath(sys.argv[0])))
+
         # Break full_path_movie into components
-        parts = os.path.split(full_path_movie)
+        parts = os.path.split(absolute_full_path_movie)
         dir_path = parts[0] + "\\"
         movie_name_with_extension = parts[1]
         movie_name = movie_name_with_extension[:len(movie_name_with_extension) - 4]
@@ -148,7 +158,7 @@ class SubDownInc:
 
         try:
             # Generate movie hash
-            movie_hash = movieHashCalculator.hashFile(full_path_movie)
+            movie_hash = movieHashCalculator.hashFile(absolute_full_path_movie)
             # Get subtitle id
             subtitle_id = self.searchForSubtitles(movie_name, movie_hash)
             # Get download link
@@ -163,18 +173,18 @@ class SubDownInc:
                 return
 
             # Softcode subtitle into movie
-            self.softcodeSubtitle(full_path_movie, full_path_subtitle, full_path_subtitled_movie)
+            self.softcodeSubtitle(absolute_full_path_movie, full_path_subtitle, full_path_subtitled_movie)
 
             # Replace original movie
             if self.bool_delete_original_movie_after_task:
-                self.replaceOriginal(full_path_movie, full_path_subtitled_movie)
+                self.replaceOriginal(absolute_full_path_movie, full_path_subtitled_movie)
 
             # Delete subtitle file
             if self.bool_delete_srt_file_after_task:
                 os.remove(full_path_subtitle)
 
         except Exception as e:
-            self.saveErrorsToLog(e, full_path_movie)
+            self.saveErrorsToLog(e, absolute_full_path_movie)
 
 
 def main():
@@ -185,11 +195,12 @@ def main():
     if len(sys.argv) > 2:
         print("Put path with spaces between double quotes")
         exit(1)
-    full_path_movie = sys.argv[1]
+
+    full_path_movie = os.path.abspath(sys.argv[1])
 
     # Create object
     sdi = SubDownInc()
-    sdi.processMovie(full_path_movie)
+    sdi.processMovie(os.path.abspath(full_path_movie))
 
 
 if __name__ == "__main__":
